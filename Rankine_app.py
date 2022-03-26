@@ -46,6 +46,8 @@ class main_window(QWidget, Ui_Form):
         self.le_Efficiency.setText(str(round(self.rankine.efficiency, 2)))
         self.le_TurbineWork.setText(str(round(self.rankine.turbine_work, 2)))
 
+        self.lbl_SatPropHigh.setText("High Pressure Saturated Properties \nPSat = {PSat: .2f} bar, TSat = {TSat: .2f}C\nhf = {hf: .2f} kJ/kg, hg = {hg: .2f} kJ/kg\nsf = {sf: .2f} kJ/kg*k, sg = {sg: .2f} kJ/kg*K\nvf = {vf: .4f} m^3/kg, vg = {vg: .2f} m^3/kg" .format(PSat=self.rankine.p_high/100,TSat=self.rankine.state1.T,hf=self.rankine.state1.hf,hg=self.rankine.state1.hg,sf=self.rankine.state1.sf,sg=self.rankine.state1.sg,vf=self.rankine.state1.vf,vg=self.rankine.state1.vg))
+        self.lbl_SatPropLow.setText("Low Pressure Saturated Properties\nPSat = {PSat: .2f} bar, TSat = {TSat: .2f}C\nhf = {hf: .2f} kJ/kg, hg = {hg: .2f} kJ/kg\nsf = {sf: .2f} kJ/kg*k, sg = {sg: .2f} kJ/kg*K\nvf = {vf: .4f} m^3/kg, vg = {vg: .2f} m^3/kg" .format(PSat=self.rankine.p_low/100,TSat=self.rankine.state2.T,hf=self.rankine.state2.hf,hg=self.rankine.state2.hg,sf=self.rankine.state2.sf,sg=self.rankine.state2.sg,vf=self.rankine.state2.vf,vg=self.rankine.state2.vg))
 
         return
 

@@ -326,7 +326,7 @@ class Ui_Form(object):
         self.rdo_Quality.setText(_translate("Form", "Quality"))
         self.rdo_THigh.setText(_translate("Form", "T High"))
         self.label.setText(_translate("Form", "Turbine Eff."))
-        self.le_TurbineEff.setText(_translate("Form", "1.0"))
+        self.le_TurbineEff.setText(_translate("Form", ".95"))
         self.le_TurbineEff.setPlaceholderText(_translate("Form", "turbine isentropic efficiency 0.0<eta<=1.0"))
         self.lbl_SatPropHigh.setText(_translate("Form", "High Pressure Saturated Properties"))
         self.lbl_SatPropLow.setText(_translate("Form", "Low Pressure Saturated Properties"))
