@@ -4,6 +4,7 @@ from Rankine_GUI import Ui_Form  # from the GUI file your created
 from Calc_state import Steam_SI as steam
 from Rankine import rankine
 from Steam import steam
+from PyQt5 import QtCore, QtGui, QtWidgets
 class main_window(QWidget, Ui_Form):
     def __init__(self):
         """
@@ -32,6 +33,7 @@ class main_window(QWidget, Ui_Form):
         :return:
         """
         #getting values from rankine
+        _translate = QtCore.QCoreApplication.translate
         self.rankine.p_high = float(self.le_PHigh.text())*100
         self.rankine.p_low = float(self.le_PLow.text())*100
         self.rankine.eff_turbine = float(self.le_TurbineEff.text())
@@ -39,6 +41,11 @@ class main_window(QWidget, Ui_Form):
         #otherwise, leave it as is to fill in after calculated
         self.rankine.quality = float(self.le_TurbineInletCondition.text()) if self.rdo_Quality.isChecked() else None
         self.rankine.t_high = float(self.le_TurbineInletCondition.text()) if self.rdo_THigh.isChecked() else None
+        if self.rdo_Quality.isChecked():
+            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet:x ="))
+        if self.rdo_THigh.isChecked():
+            self.lbl_TurbineInletCondition.setText(_translate("Form","Turbine Inlet:T_high ="))
+
         self.rankine.calc_efficiency()
 
         self.le_H1.setText(str(round(self.rankine.state1.h, 2)))
