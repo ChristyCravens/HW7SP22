@@ -4,7 +4,7 @@ from Steam import steam
 import matplotlib.pyplot as plt
 
 class rankine():
-    def __init__(self, p_low=8, p_high=8000, eff_turbine=0.95, t_high=None, name='Rankine Cycle'):
+    def __init__(self, p_low=8, p_high=8000, eff_turbine=0.95, t_high=200, quality=1, name='Rankine Cycle'):
         '''
         Constructor for rankine power cycle.  If t_high is not specified, the State 1
         is assigned x=1 (saturated steam @ p_high).  Otherwise, use t_high to find State 1.
@@ -25,20 +25,21 @@ class rankine():
         self.state2=None
         self.state3=None
         self.state4=None
+        self.quality=quality
         self.eff_turbine=eff_turbine # Rankine class modified to include a value for isentropic turbine efficiency
 
     def calc_efficiency(self):
         #calculate the 4 states
         #state 1: turbine inlet (p_high, t_high) superheated or saturated vapor
         if(self.t_high==None):
-            self.state1 = steam(self.p_high, x=1.0, name='Turbine Inlet') # instantiate a steam object with conditions of state 1 as saturated steam, named 'Turbine Inlet'
+            self.state1 = steam(self.p_high, x=self.quality, name='Turbine Inlet') # instantiate a steam object with conditions of state 1 as saturated steam, named 'Turbine Inlet'
         else:
             self.state1= steam(self.p_high, T=self.t_high, name='Turbine Inlet') # instantiate a steam object with conditions of state 1 at t_high, named 'Turbine Inlet'
         #state 2: turbine exit (p_low, s=s_turbine inlet) two-phase
         self.state2= steam(self.p_low, s=self.state1.s, name="Turbine Exit") # instantiate a steam object with conditions of state 2, named 'Turbine Exit'
         #state 3: pump inlet (p_low, x=0) saturated liquid
         self.state3= steam(self.p_low, x=0, name='Pump Inlet') # instantiate a steam object with conditions of state 3 as saturated liquid, named 'Pump Inlet'
-        #state 4: pump exit (p_high,s=s_pump_inlet) typically sub-cooled, but estimate as saturated liquid
+        #state 4: pump exit (p_high,s=s_pump_inle t) typically sub-cooled, but estimate as saturated liquid
         self.state4=steam(self.p_high, s=self.state3.s, name='Pump Exit')
         self.state4.h=self.state3.h+self.state3.v*(self.p_high-self.p_low)
 
@@ -70,7 +71,6 @@ class rankine():
         :return: none, just the graph
         """
         ts, ps, hfs, hgs, sfs, sgs, vfs, vgs = np.loadtxt('sat_water_table.txt', skiprows=1, unpack=True) #reads values from water table txt file
-        #tcol, hcol, scol, pcol = np.loadtxt('superheated_water_table.txt', skiprows=1, unpack=True)
         plt.xlim(0,8.99) #sets limits on x
         plt.ylim(0,550) #sets limits on y
         plt.plot(sfs,ts) #plots the sat fluid entropy vs. Tsat
@@ -101,7 +101,7 @@ class rankine():
         pass
 
 def main(): # This doesn't run for Q3 of the exam so I initially fed it values to check the numbers for my summary
-    rankine1= rankine(8,8000,t_high=500,eff_turbine=0.95,name='Rankine Cycle - Superheated at turbine inlet') #instantiate a rankine object to test it.
+    rankine1= rankine(8,8000,eff_turbine=0.95,name='Rankine Cycle - Superheated at turbine inlet') #instantiate a rankine object to test it.
     #t_high is specified
     #if t_high were not specified, then x_high = 1 is assumed
     eff=rankine1.calc_efficiency()
