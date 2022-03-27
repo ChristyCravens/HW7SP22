@@ -1,3 +1,5 @@
+# This is Prof. Smay's Rankine file
+
 import numpy as np
 
 from Steam import steam
@@ -36,7 +38,12 @@ class rankine():
         else:
             self.state1= steam(self.p_high, T=self.t_high, name='Turbine Inlet') # instantiate a steam object with conditions of state 1 at t_high, named 'Turbine Inlet'
         #state 2: turbine exit (p_low, s=s_turbine inlet) two-phase
-        self.state2= steam(self.p_low, s=self.state1.s, name="Turbine Exit") # instantiate a steam object with conditions of state 2, named 'Turbine Exit'
+        self.state2s= steam(self.p_low, s=self.state1.s, name="Turbine Exit") # instantiate a steam object with conditions of state 2, named 'Turbine Exit'
+        if self.eff_turbine < 1.0:  # eff=(h1-h2)/(h1-h2s) -> h2=h1-eff(h1-h2s)
+            h2=self.state1.h-self.eff_turbine*(self.state1.h-self.state2s.h)
+            self.state2=steam(self.p_low,h=h2, name="Turbine Exit")
+        else:
+            self.state2=self.state2s
         #state 3: pump inlet (p_low, x=0) saturated liquid
         self.state3= steam(self.p_low, x=0, name='Pump Inlet') # instantiate a steam object with conditions of state 3 as saturated liquid, named 'Pump Inlet'
         #state 4: pump exit (p_high,s=s_pump_inle t) typically sub-cooled, but estimate as saturated liquid
