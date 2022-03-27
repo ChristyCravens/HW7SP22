@@ -44,9 +44,9 @@ class main_window(QWidget, Ui_Form):
         self.rankine.t_high = float(self.le_TurbineInletCondition.text()) if self.rdo_THigh.isChecked() else None
         # if Quality/THigh is checked, set the text accordingly
         if self.rdo_Quality.isChecked():
-            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet:x ="))
+            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: x ="))
         if self.rdo_THigh.isChecked():
-            self.lbl_TurbineInletCondition.setText(_translate("Form","Turbine Inlet:T_high ="))
+            self.lbl_TurbineInletCondition.setText(_translate("Form","Turbine Inlet: T_high ="))
 
         self.rankine.calc_efficiency()
         
