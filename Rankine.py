@@ -1,5 +1,3 @@
-# This is Prof. Smay's Rankine file
-
 import numpy as np
 
 from Steam import steam
