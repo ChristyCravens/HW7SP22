@@ -50,7 +50,7 @@ class rankine():
         self.state4=steam(self.p_high, s=self.state3.s, name='Pump Exit')
         self.state4.h=self.state3.h+self.state3.v*(self.p_high-self.p_low)
 
-        self.turbine_work= (self.state1.h - self.state2.h)*self.eff_turbine # calculate turbine work #multiplied by turbine efficiency
+        self.turbine_work= (self.state1.h - self.state2.h) # calculate turbine work #multiplied by turbine efficiency
         self.pump_work= self.state4.h - self.state3.h # calculate pump work
         self.heat_added= self.state1.h - self.state4.h # calculate heat added
         self.efficiency=100.0*(self.turbine_work - self.pump_work)/self.heat_added
