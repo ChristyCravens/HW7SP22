@@ -58,6 +58,12 @@ class steam():
         sg=float(griddata((ps),sgs,(Pbar)))
         vf=float(griddata((ps),vfs,(Pbar)))
         vg=float(griddata((ps),vgs,(Pbar)))
+        self.hf = float(griddata((ps), hfs, (Pbar)))
+        self.hg = float(griddata((ps), hgs, (Pbar)))
+        self.sf = float(griddata((ps), sfs, (Pbar)))
+        self.sg = float(griddata((ps), sgs, (Pbar)))
+        self.vf = float(griddata((ps), vfs, (Pbar)))
+        self.vg = float(griddata((ps), vgs, (Pbar)))
 
         self.hf=hf #this creates a member variable for the class that can be accessed from an object
 
