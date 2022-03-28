@@ -23,6 +23,15 @@ class main_window(QWidget, Ui_Form):
 
         self.assign_widgets()  # connects signals and slots
         self.show()
+       
+    def setText(self):
+        # if Quality/THigh is checked, set the text accordingly
+        _translate = QtCore.QCoreApplication.translate
+        if self.rdo_Quality.isChecked():
+            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: x ="))
+        if self.rdo_THigh.isChecked():
+            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: T_high ="))
+        return
 
     def assign_widgets(self):
         # connect clicked signal of pushButton_Calculate to self.Calculate
@@ -34,7 +43,6 @@ class main_window(QWidget, Ui_Form):
         :return:
         """
         #getting values from rankine
-        _translate = QtCore.QCoreApplication.translate
         self.rankine.p_high = float(self.le_PHigh.text())*100
         self.rankine.p_low = float(self.le_PLow.text())*100
         self.rankine.eff_turbine = float(self.le_TurbineEff.text())
@@ -42,11 +50,6 @@ class main_window(QWidget, Ui_Form):
         #otherwise, leave it as is to fill in after calculated
         self.rankine.quality = float(self.le_TurbineInletCondition.text()) if self.rdo_Quality.isChecked() else None
         self.rankine.t_high = float(self.le_TurbineInletCondition.text()) if self.rdo_THigh.isChecked() else None
-        # if Quality/THigh is checked, set the text accordingly
-        if self.rdo_Quality.isChecked():
-            self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: x ="))
-        if self.rdo_THigh.isChecked():
-            self.lbl_TurbineInletCondition.setText(_translate("Form","Turbine Inlet: T_high ="))
 
         self.rankine.calc_efficiency()
         
