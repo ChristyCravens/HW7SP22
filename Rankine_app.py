@@ -33,8 +33,10 @@ class main_window(QWidget, Ui_Form):
         """
         # if Quality/THigh is checked, set the text accordingly
         _translate = QtCore.QCoreApplication.translate
+        # if quality is checked, change the displayed text to x=
         if self.rdo_Quality.isChecked():
             self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: x ="))
+        # if THigh is checked, changed the displayed text to THigh=
         if self.rdo_THigh.isChecked():
             self.lbl_TurbineInletCondition.setText(_translate("Form", "Turbine Inlet: T_high ="))
         return
