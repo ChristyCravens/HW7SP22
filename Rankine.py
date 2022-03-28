@@ -1,3 +1,5 @@
+# This is Dr. Smay's code for Rankine, with a few necessary modifications to work with our code
+
 import numpy as np
 
 from Steam import steam
