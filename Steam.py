@@ -1,3 +1,5 @@
+# This is Dr. Smay's code for Steam, with a few necessary modifications to work with our code
+
 import numpy as np
 from scipy.interpolate import griddata
 
