@@ -48,9 +48,9 @@ class main_window(QWidget, Ui_Form):
         """
         # connect clicked signal of pushButton_Calculate to self.Calculate
         self.btn_Calculate.clicked.connect(self.Calculate)
-        # connect clicked signal of radio_quality to self.setText to change the text to x=
+        # connect clicked signal of radio_quality to self.setText
         self.rdo_Quality.clicked.connect(self.setText)
-        # connect clicked signal of radio_THigh to self.setText to change the text to T_High=
+        # connect clicked signal of radio_THigh to self.setText
         self.rdo_THigh.clicked.connect(self.setText)
 
     def Calculate(self):
