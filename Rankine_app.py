@@ -26,6 +26,11 @@ class main_window(QWidget, Ui_Form):
         self.show()
 
     def setText(self):
+        """
+        This function simply alters the displayed text for the turbine inlet between x= when quality is clicked
+        and T_high= when T High is clicked. That way, the user can easily identify the input value needed.
+        :return:
+        """
         # if Quality/THigh is checked, set the text accordingly
         _translate = QtCore.QCoreApplication.translate
         if self.rdo_Quality.isChecked():
@@ -35,6 +40,10 @@ class main_window(QWidget, Ui_Form):
         return
 
     def assign_widgets(self):
+        """
+        This function assigns the buttons/radios accordingly
+        :return: 
+        """
         # connect clicked signal of pushButton_Calculate to self.Calculate
         self.btn_Calculate.clicked.connect(self.Calculate)
         self.rdo_Quality.clicked.connect(self.setText)
